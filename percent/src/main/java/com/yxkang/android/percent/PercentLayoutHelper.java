@@ -27,11 +27,11 @@ import android.view.ViewGroup;
 
 /**
  * Helper for layouts that want to support percentage based dimensions.
- *
+ * <br>
  * <p>This class collects utility methods that are involved in extracting percentage based dimension
  * attributes and applying them to ViewGroup's children. If you would like to implement a layout
  * that supports percentage based dimensions, you need to take several steps:
- *
+ * <br>
  * <ol>
  * <li> You need a {@link ViewGroup.LayoutParams} subclass in your ViewGroup that implements
  * {@link com.yxkang.android.percent.PercentLayoutHelper.PercentLayoutParams}.
@@ -50,19 +50,19 @@ import android.view.ViewGroup;
  * pattern:
  * <pre class="prettyprint">
  * protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
- *     mHelper.adjustChildren(widthMeasureSpec, heightMeasureSpec);
- *     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
- *     if (mHelper.handleMeasuredStateTooSmall()) {
- *         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
- *     }
+ * mHelper.adjustChildren(widthMeasureSpec, heightMeasureSpec);
+ * super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+ * if (mHelper.handleMeasuredStateTooSmall()) {
+ * super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+ * }
  * }
  * </pre>
  * <li>In your {@link ViewGroup#onLayout(boolean, int, int, int, int)} override, you need to
  * implement following pattern:
  * <pre class="prettyprint">
  * protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
- *     super.onLayout(changed, left, top, right, bottom);
- *     mHelper.restoreOriginalParams();
+ * super.onLayout(changed, left, top, right, bottom);
+ * mHelper.restoreOriginalParams();
  * }
  * </pre>
  * </ol>
@@ -80,9 +80,14 @@ public class PercentLayoutHelper {
      * Helper method to be called from {@link ViewGroup.LayoutParams#setBaseAttributes} override
      * that reads layout_width and layout_height attribute values without throwing an exception if
      * they aren't present.
+     *
+     * @param params     ViewGroup.LayoutParams
+     * @param array      TypedArray
+     * @param widthAttr  widthAttr
+     * @param heightAttr heightAttr
      */
     public static void fetchWidthAndHeight(ViewGroup.LayoutParams params, TypedArray array,
-            int widthAttr, int heightAttr) {
+                                           int widthAttr, int heightAttr) {
         params.width = array.getLayoutDimension(widthAttr, 0);
         params.height = array.getLayoutDimension(heightAttr, 0);
     }
@@ -90,7 +95,8 @@ public class PercentLayoutHelper {
     /**
      * Iterates over children and changes their width and height to one calculated from percentage
      * values.
-     * @param widthMeasureSpec Width MeasureSpec of the parent ViewGroup.
+     *
+     * @param widthMeasureSpec  Width MeasureSpec of the parent ViewGroup.
      * @param heightMeasureSpec Height MeasureSpec of the parent ViewGroup.
      */
     public void adjustChildren(int widthMeasureSpec, int heightMeasureSpec) {
@@ -129,9 +135,13 @@ public class PercentLayoutHelper {
     /**
      * Constructs a PercentLayoutInfo from attributes associated with a View. Call this method from
      * {@code LayoutParams(Context c, AttributeSet attrs)} constructor.
+     *
+     * @param context Context
+     * @param attrs   AttributeSet
+     * @return PercentLayoutInfo
      */
     public static PercentLayoutInfo getPercentLayoutInfo(Context context,
-            AttributeSet attrs) {
+                                                         AttributeSet attrs) {
         PercentLayoutInfo info = null;
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.PercentLayout_Layout);
         float value = array.getFraction(R.styleable.PercentLayout_Layout_layout_widthPercent, 1, 1,
@@ -265,7 +275,7 @@ public class PercentLayoutHelper {
     /**
      * Iterates over children and checks if any of them would like to get more space than it
      * received through the percentage dimension.
-     *
+     * <br>
      * If you are building a layout that supports percentage dimensions you are encouraged to take
      * advantage of this method. The developer should be able to specify that a child should be
      * remeasured by adding normal dimension attribute with {@code wrap_content} value. For example
@@ -356,9 +366,13 @@ public class PercentLayoutHelper {
 
         /**
          * Fills {@code ViewGroup.LayoutParams} dimensions based on percentage values.
+         *
+         * @param params     ViewGroup.LayoutParams
+         * @param widthHint  widthHint
+         * @param heightHint heightHint
          */
         public void fillLayoutParams(ViewGroup.LayoutParams params, int widthHint,
-                int heightHint) {
+                                     int heightHint) {
             // Preserve the original layout params, so we can restore them after the measure step.
             mPreservedParams.width = params.width;
             mPreservedParams.height = params.height;
@@ -395,9 +409,13 @@ public class PercentLayoutHelper {
         /**
          * Fills {@code ViewGroup.MarginLayoutParams} dimensions and margins based on percentage
          * values.
+         *
+         * @param params     ViewGroup.MarginLayoutParams
+         * @param widthHint  widthHint
+         * @param heightHint heightHint
          */
         public void fillMarginLayoutParams(ViewGroup.MarginLayoutParams params, int widthHint,
-                int heightHint) {
+                                           int heightHint) {
             fillLayoutParams(params, widthHint, heightHint);
 
             // Preserver the original margins, so we can restore them after the measure step.
@@ -449,6 +467,8 @@ public class PercentLayoutHelper {
          * Restores original dimensions and margins after they were changed for percentage based
          * values. Calling this method only makes sense if you previously called
          * {@link PercentLayoutInfo#fillMarginLayoutParams}.
+         *
+         * @param params ViewGroup.MarginLayoutParams
          */
         public void restoreMarginLayoutParams(ViewGroup.MarginLayoutParams params) {
             restoreLayoutParams(params);
@@ -466,6 +486,8 @@ public class PercentLayoutHelper {
          * Restores original dimensions after they were changed for percentage based values. Calling
          * this method only makes sense if you previously called
          * {@link PercentLayoutInfo#fillLayoutParams}.
+         *
+         * @param params ViewGroup.LayoutParams
          */
         public void restoreLayoutParams(ViewGroup.LayoutParams params) {
             params.width = mPreservedParams.width;
@@ -476,7 +498,7 @@ public class PercentLayoutHelper {
     /**
      * If a layout wants to support percentage based dimensions and use this helper class, its
      * {@code LayoutParams} subclass must implement this interface.
-     *
+     * <br>
      * Your {@code LayoutParams} subclass should contain an instance of {@code PercentLayoutInfo}
      * and the implementation of this interface should be a simple accessor.
      */
