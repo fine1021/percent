@@ -15,9 +15,13 @@
             android:icon="@android:drawable/ic_menu_info_details"
             android:title="FrameLayout"/>
         <item
-            android:id="@+id/nav_design"
+            android:id="@+id/nav_recycler"
             android:icon="@android:drawable/ic_menu_info_details"
-            android:title="DesignSupport"/>
+            android:title="RecyclerView"/>
+        <item
+            android:id="@+id/nav_collapsing"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="DesignCollapsing"/>
         <item
             android:id="@+id/nav_tab"
             android:icon="@android:drawable/ic_menu_info_details"

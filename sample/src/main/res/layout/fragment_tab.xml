@@ -1,9 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.yxkang.android.percent.sample.fragment.TabFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.yxkang.android.percent.sample.fragment.TabFragment">
 
 
     <android.support.design.widget.TextInputLayout
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content">
 
         <EditText
+            style="@style/InputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Input Your Name"
@@ -20,4 +22,19 @@
 
     </android.support.design.widget.TextInputLayout>
 
-</FrameLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            style="@style/InputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Input Your Name"
+            android:inputType="text"
+            android:textSize="18sp"
+            app:hintAnimationEnabled="true"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

@@ -102,9 +102,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_frame) {
             transaction.replace(R.id.container, FrameLayoutFragment.newInstance("", ""));
             transaction.commit();
-        } else if (id == R.id.nav_design) {
+        } else if (id == R.id.nav_recycler) {
             startActivity(new Intent(this, RecyclerViewActivity.class));
-        } else if (id == R.id.nav_tab) {
+        } else if (id == R.id.nav_collapsing) {
+            startActivity(new Intent(this, CollapsingActivity.class));
+        }else if (id == R.id.nav_tab) {
             startActivity(new Intent(this, TabActivity.class));
         } else if (id == R.id.nav_share) {
             Toast.makeText(this, "share", Toast.LENGTH_SHORT).show();
