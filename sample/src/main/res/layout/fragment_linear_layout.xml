@@ -1,0 +1,40 @@
+<com.yxkang.android.percent.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yxkang.android.percent.sample.fragment.LinearLayoutFragment">
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#7700ff00"
+        android:gravity="center"
+        android:text="w:70%,h:20%"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="70%"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#770000ff"
+        android:gravity="center"
+        android:text="width:100%,height:20%"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="100%"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="right"
+        android:background="#396190"
+        android:gravity="center"
+        android:text="w:30%,h:20%"
+        app:layout_heightPercent="20%"
+        app:layout_widthPercent="30%"
+        tools:ignore="RtlHardcoded"/>
+
+</com.yxkang.android.percent.PercentLinearLayout>

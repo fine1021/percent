@@ -1,1 +1,1 @@
-include ':app', ':percent'
+include ':sample', ':percent'
