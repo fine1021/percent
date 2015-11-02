@@ -33,7 +33,7 @@ publish {
     repoName = 'maven'
     groupId = 'com.yxkang.android'
     artifactId = 'percent'
-    publishVersion = '1.0.0-beta1'
+    publishVersion = '1.0.0'
     description = 'android percent layout'
     website = 'https://github.com/fine1021/percent'
     issueTracker = "${website}/issues"
