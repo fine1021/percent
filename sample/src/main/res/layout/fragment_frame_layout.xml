@@ -1,4 +1,4 @@
-<com.yxkang.android.percent.PercentFrameLayout
+<android.support.percent.PercentFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -39,4 +39,4 @@
         app:layout_heightPercent="20%"
         app:layout_widthPercent="100%"/>
 
-</com.yxkang.android.percent.PercentFrameLayout>
+</android.support.percent.PercentFrameLayout>
