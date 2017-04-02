@@ -2,12 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
-
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 23
+        minSdkVersion 9
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -21,8 +20,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.android.support:support-v4:25.3.1'
 }
 
 Properties properties = new Properties()
@@ -33,7 +31,7 @@ publish {
     repoName = 'maven'
     groupId = 'com.yxkang.android'
     artifactId = 'percent'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     description = 'android percent layout'
     website = 'https://github.com/fine1021/percent'
     issueTracker = "${website}/issues"

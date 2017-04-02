@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.yxkang.android.percent;
+package android.support.percent;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -30,7 +32,7 @@ import android.widget.FrameLayout;
  * this example:
  *
  * <pre class="prettyprint">
- * &lt;com.yxkang.android.percent.PercentFrameLayout
+ * &lt;android.support.percent.PercentFrameLayout
  *         xmlns:android="http://schemas.android.com/apk/res/android"
  *         xmlns:app="http://schemas.android.com/apk/res-auto"
  *         android:layout_width="match_parent"
@@ -40,7 +42,7 @@ import android.widget.FrameLayout;
  *         app:layout_heightPercent="50%"
  *         app:layout_marginTopPercent="25%"
  *         app:layout_marginLeftPercent="25%"/&gt;
- * &lt;/com.yxkang.android.percent.PercentFrameLayout/&gt;
+ * &lt;/android.support.percent.PercentFrameLayout&gt;
  * </pre>
  *
  * The attributes that you can use are:
@@ -55,6 +57,16 @@ import android.widget.FrameLayout;
  *     <li>{@code layout_marginStartPercent}
  *     <li>{@code layout_marginEndPercent}
  *     <li>{@code layout_aspectRatio}
+ *     <li>{@code layout_percentBasedOn}
+ *     <li>{@code layout_widthDimensionRatio}
+ *     <li>{@code layout_heightDimensionRatio}
+ *     <li>{@code layout_marginDimensionRatio}
+ *     <li>{@code layout_marginLeftDimensionRatio}
+ *     <li>{@code layout_marginTopDimensionRatio}
+ *     <li>{@code layout_marginRightDimensionRatio}
+ *     <li>{@code layout_marginBottomDimensionRatio}
+ *     <li>{@code layout_marginStartDimensionRatio}
+ *     <li>{@code layout_marginEndDimensionRatio}
  * </ul>
  *
  * It is not necessary to specify {@code layout_width/height} if you specify {@code
@@ -144,7 +156,10 @@ public class PercentFrameLayout extends FrameLayout {
             gravity = source.gravity;
         }
 
+        @RequiresApi(19)
+        @TargetApi(19)
         public LayoutParams(LayoutParams source) {
+            // The copy constructor used here is only supported on API 19+.
             this((FrameLayout.LayoutParams) source);
             mPercentLayoutInfo = source.mPercentLayoutInfo;
         }

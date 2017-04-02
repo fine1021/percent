@@ -1,36 +1,21 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package com.yxkang.android.percent;
+package android.support.percent;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
+
 
 /**
- * Subclass of {@link RelativeLayout} that supports percentage based dimensions and
+ * Subclass of {@link LinearLayout} that supports percentage based dimensions and
  * margins.
  *
  * You can specify dimension or a margin of child by using attributes with "Percent" suffix. Follow
  * this example:
  *
  * <pre class="prettyprint">
- * &lt;com.yxkang.android.percent.PercentRelativeLayout
+ * &lt;android.support.percent.PercentLinearLayout
  *         xmlns:android="http://schemas.android.com/apk/res/android"
  *         xmlns:app="http://schemas.android.com/apk/res-auto"
  *         android:layout_width="match_parent"
@@ -40,7 +25,7 @@ import android.widget.RelativeLayout;
  *         app:layout_heightPercent="50%"
  *         app:layout_marginTopPercent="25%"
  *         app:layout_marginLeftPercent="25%"/&gt;
- * &lt;/com.yxkang.android.percent.PercentRelativeLayout/&gt;
+ * &lt;/android.support.percent.PercentLinearLayout/&gt;
  * </pre>
  *
  * The attributes that you can use are:
@@ -55,6 +40,16 @@ import android.widget.RelativeLayout;
  *     <li>{@code layout_marginStartPercent}
  *     <li>{@code layout_marginEndPercent}
  *     <li>{@code layout_aspectRatio}
+ *     <li>{@code layout_percentBasedOn}
+ *     <li>{@code layout_widthDimensionRatio}
+ *     <li>{@code layout_heightDimensionRatio}
+ *     <li>{@code layout_marginDimensionRatio}
+ *     <li>{@code layout_marginLeftDimensionRatio}
+ *     <li>{@code layout_marginTopDimensionRatio}
+ *     <li>{@code layout_marginRightDimensionRatio}
+ *     <li>{@code layout_marginBottomDimensionRatio}
+ *     <li>{@code layout_marginStartDimensionRatio}
+ *     <li>{@code layout_marginEndDimensionRatio}
  * </ul>
  *
  * It is not necessary to specify {@code layout_width/height} if you specify {@code
@@ -74,29 +69,30 @@ import android.widget.RelativeLayout;
  * This will make the aspect ratio 16:9 (1.78:1) with the width fixed at 300dp and height adjusted
  * accordingly.
  */
-public class PercentRelativeLayout extends RelativeLayout {
+public class PercentLinearLayout extends LinearLayout {
+
     private final PercentLayoutHelper mHelper = new PercentLayoutHelper(this);
 
-    public PercentRelativeLayout(Context context) {
+    public PercentLinearLayout(Context context) {
         super(context);
     }
 
-    public PercentRelativeLayout(Context context, AttributeSet attrs) {
+    public PercentLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public PercentRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
-    @Override
-    protected LayoutParams generateDefaultLayoutParams() {
-        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+    public PercentLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams(getContext(), attrs);
+    }
+
+    @Override
+    protected LayoutParams generateDefaultLayoutParams() {
+        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     }
 
     @Override
@@ -109,13 +105,14 @@ public class PercentRelativeLayout extends RelativeLayout {
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
         mHelper.restoreOriginalParams();
     }
 
-    public static class LayoutParams extends RelativeLayout.LayoutParams
+    public static class LayoutParams extends LinearLayout.LayoutParams
             implements PercentLayoutHelper.PercentLayoutParams {
+
         private PercentLayoutHelper.PercentLayoutInfo mPercentLayoutInfo;
 
         public LayoutParams(Context c, AttributeSet attrs) {
@@ -127,12 +124,12 @@ public class PercentRelativeLayout extends RelativeLayout {
             super(width, height);
         }
 
-        public LayoutParams(ViewGroup.LayoutParams source) {
+        public LayoutParams(MarginLayoutParams source) {
             super(source);
         }
 
-        public LayoutParams(MarginLayoutParams source) {
-            super(source);
+        public LayoutParams(ViewGroup.LayoutParams p) {
+            super(p);
         }
 
         @Override
@@ -140,7 +137,6 @@ public class PercentRelativeLayout extends RelativeLayout {
             if (mPercentLayoutInfo == null) {
                 mPercentLayoutInfo = new PercentLayoutHelper.PercentLayoutInfo();
             }
-
             return mPercentLayoutInfo;
         }
 
